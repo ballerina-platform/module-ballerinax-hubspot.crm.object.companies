@@ -338,7 +338,9 @@ public type AssociatedId record {
 
 # Provides API key configurations needed when communicating with a remote HTTP endpoint.
 public type ApiKeysConfig record {|
+    // this is private app legacy
     string private\-app\-legacy;
+    // this is private app
     string private\-app;
 |};
 

@@ -19,7 +19,7 @@
     "x-hubspot-introduction" : "Use the companies API to create and manage CRM records that represent the companies and organizations that interact with your business."
   },
   "servers" : [ {
-    "url" : "https://api.hubapi.com"
+    "url" : "https://api.hubapi.com/crm/v3/objects"
   } ],
   "tags" : [ {
     "name" : "Batch"
@@ -31,7 +31,7 @@
     "name" : "Search"
   } ],
   "paths" : {
-    "/crm/v3/objects/companies/batch/read" : {
+    "/companies/batch/read" : {
       "post" : {
         "tags" : [ "Batch" ],
         "summary" : "Read a batch of companies by internal ID, or unique property values",
@@ -90,7 +90,7 @@
         } ]
       }
     },
-    "/crm/v3/objects/companies/{companyId}" : {
+    "/companies/{companyId}" : {
       "get" : {
         "tags" : [ "Basic" ],
         "summary" : "Read",
@@ -274,7 +274,7 @@
         } ]
       }
     },
-    "/crm/v3/objects/companies/merge" : {
+    "/companies/merge" : {
       "post" : {
         "tags" : [ "Merge" ],
         "summary" : "Merge two companies with same type",
@@ -312,7 +312,7 @@
         } ]
       }
     },
-    "/crm/v3/objects/companies/batch/archive" : {
+    "/companies/batch/archive" : {
       "post" : {
         "tags" : [ "Batch" ],
         "summary" : "Archive a batch of companies by ID",
@@ -344,7 +344,7 @@
         } ]
       }
     },
-    "/crm/v3/objects/companies/batch/create" : {
+    "/companies/batch/create" : {
       "post" : {
         "tags" : [ "Batch" ],
         "summary" : "Create a batch of companies",
@@ -392,7 +392,7 @@
         } ]
       }
     },
-    "/crm/v3/objects/companies/batch/update" : {
+    "/companies/batch/update" : {
       "post" : {
         "tags" : [ "Batch" ],
         "summary" : "Update a batch of companies by internal ID, or unique property values",
@@ -440,7 +440,7 @@
         } ]
       }
     },
-    "/crm/v3/objects/companies" : {
+    "/companies" : {
       "get" : {
         "tags" : [ "Basic" ],
         "summary" : "List",
@@ -578,7 +578,7 @@
         } ]
       }
     },
-    "/crm/v3/objects/companies/batch/upsert" : {
+    "/companies/batch/upsert" : {
       "post" : {
         "tags" : [ "Batch" ],
         "summary" : "Create or update a batch of companies by unique property values",
@@ -627,7 +627,7 @@
         } ]
       }
     },
-    "/crm/v3/objects/companies/search" : {
+    "/companies/search" : {
       "post" : {
         "tags" : [ "Search" ],
         "operationId" : "post-/crm/v3/objects/companies/search_doSearch",
