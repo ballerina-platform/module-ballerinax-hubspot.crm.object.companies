@@ -5,8 +5,6 @@ The `ballerinax/hubspot.crm.object.companies` package offers APIs to connect and
 
 ## Setup guide
 
-[//]: # "TODO: Add detailed steps to obtain credentials and configure the module."
-
 To use the HubSpot Marketing Events connector, you must have access to the HubSpot API through a HubSpot developer account and a HubSpot App under it. Therefore you need to register for a developer account at HubSpot if you don't have one already.
 
 ### Step 1: Create/Login to a HubSpot Developer Account
@@ -120,8 +118,6 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 5. Store the access token securely for use in your application.
 
 ## Quickstart
-
-[//]: # "TODO: Add a quickstart guide to demonstrate a basic functionality of the module, including sample code snippets."
 
 To use the `HubSpot Marketing Events` connector in your Ballerina application, update the `.bal` file as follows:
 
