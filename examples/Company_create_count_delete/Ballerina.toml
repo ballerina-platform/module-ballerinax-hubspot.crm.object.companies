@@ -1,6 +1,6 @@
 [package]
 org = "wso2"
-name = "company_deal"
+name = "Company_create_count_delete"
 version = "0.1.0"
 distribution = "2201.10.3"
 

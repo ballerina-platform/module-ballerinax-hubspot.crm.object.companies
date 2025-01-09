@@ -304,7 +304,7 @@ modules = [
 
 [[package]]
 org = "wso2"
-name = "company_deal"
+name = "Company_create_count_delete"
 version = "0.1.0"
 dependencies = [
 	{org = "ballerina", name = "http"},
@@ -314,6 +314,6 @@ dependencies = [
 	{org = "ballerinax", name = "hubspot.crm.obj.companies"}
 ]
 modules = [
-	{org = "wso2", packageName = "company_deal", moduleName = "company_deal"}
+	{org = "wso2", packageName = "Company_create_count_delete", moduleName = "Company_create_count_delete"}
 ]
 
