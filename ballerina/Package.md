@@ -48,7 +48,7 @@ Within app developer accounts, you can create developer test accounts to test ap
 2. In the Scopes section, add the following scopes for your app using the "Add new scope" button.
 
    `crm.objects.companies.read`
-   `crm.objects.compoanies.write`
+   `crm.objects.companies.write`
 
    <img src="../docs/resources/scope_set.png" alt="Hubspot app creation 1 testacc3" style="width: 70%;">
 
@@ -119,36 +119,74 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 
 ## Quickstart
 
-To use the `HubSpot Marketing Events` connector in your Ballerina application, update the `.bal` file as follows:
+To use the `HubSpot CRM Companies Connector` connector in your Ballerina application, update the `.bal` file as follows:
 
 ### Step 1: Import the module
 
-Import the `hubspot.marketing.events` module.
+Import the `hubspot.crm.obj.companies` module.
 
-```
-import ballerinax/hubspot.marketing.events as hsmevents;
-```
+````java
+import ballerinax/hubspot.crm.obj.companies;
+````
 
 ### Step 2: Instantiate a new connector
 
-1. Create a `config.toml` file and, configure the obtained credentials in the above steps as follows:
+1. Create a `OAuth2RefreshTokenGrantConfig` with the obtained access token and initialize the connector with it.
 
-   ```
-   token = "<Access Token>"
-   ```
+````ballerina
+configurable OAuth2RefreshTokenGrantConfig & readonly auth = ?;
 
-   <!-- TODO Update -->
+final contact:Client contactClient = check new ({ auth });
+````
 
-2. Create a `hsmevents:ConnectionConfig` with the obtained access token and initialize the connector with it.
+2. Create a Config.toml file and, configure the obtained credentials in the above steps as follows:
 
-<!-- TODO Add Screenshot -->
+````toml
+[auth]
+clientId = "<Client Id>"
+clientSecret =  "<Client Secret>"
+refreshToken = "<Refresh Token>"
+credentialBearer =  "POST_BODY_BEARER"
+````
 
-### Step 3: Use Connector Operations
+### Step 3: Invoke the connector operation
 
 Now, utilize the available connector operations.
 
+**Create a contact**
+
+```ballerina
+companies:SimplePublicObjectInputForCreate newCompany = {
+    properties: {
+        "name": "NewCompany",
+        "domain": "newcompany.com",
+        "city": "Colombo",
+        "industry": "MARKETING_AND_ADVERTISING",
+        "phone": "011-222-333",
+        "state": "Western",
+        "lifecyclestage": "lead"
+    },
+    associations: []
+};
+
+companies:SimplePublicObject response = check hubSpotCrmCompanies->/companies.post(newCompany);
+
+```
+
+**List contacts**
+
+```ballerina
+companies:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging companies = check hubSpotCrmCompanies->/companies;
+
+```
+
+### Step 4: Run the Ballerina application
+
+````bash
+bal run
+````
+
+
 ## Examples
 
-The `HubSpot Marketing Events` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-hubspot.marketing.events/tree/main/examples/), covering the following use cases:
-
-[//]: # "TODO: Add examples"
+The `Ballerina HubSpot CRM Companies Connector` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-hubspot.crm.object.companies/tree/main/examples/), covering the following use cases:

@@ -38,6 +38,7 @@ isolated function testGetAllCompanies() returns error? {
   test:assertTrue(companies.results.length() > 0);
 };
 
+
 @test:Config {}
 isolated function testBatchRead() returns error? {
     // Define the payload for the request
