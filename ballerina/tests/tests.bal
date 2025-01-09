@@ -30,7 +30,6 @@ OAuth2RefreshTokenGrantConfig auth = {
        credentialBearer: oauth2:POST_BODY_BEARER
 };
 
-
 final Client hubSpotCrmCompanies = check new ({ auth });
 
 @test:Config {}
@@ -96,7 +95,6 @@ isolated function testGetCompanies() returns error? {
 
 }
 
-
 @test:Config {}
 isolated function testSearchCompany() returns error? {
     // Define the payload for the search request
@@ -114,7 +112,6 @@ isolated function testSearchCompany() returns error? {
     test:assertTrue(response.results.length() > 0, "Expected at least one company to match the search criteria");
 
 }
-
 
 @test:Config {}
 isolated function testUpdateCompany() returns error? {
@@ -136,7 +133,6 @@ isolated function testUpdateCompany() returns error? {
     test:assertEquals(response.properties["domain"], "updateddomain.com", "The company domain was not updated correctly.");
 
 }
-
 
 @test:Config {}
 isolated function testGetCompanyById() returns error? {
@@ -166,7 +162,6 @@ isolated function testDeleteCompany() returns error? {
     test:assertEquals(response.statusCode, 204, "Company was not archived successfully.");
 
 }
-
 
 @test:Config {}
 isolated function testBatchUpsert() returns error? {
@@ -203,8 +198,6 @@ isolated function testBatchUpsert() returns error? {
 
 }
 
-
-
 @test:Config {}
 isolated function testBatchCreate() returns error? {
     // Define the batch payload for creating companies
@@ -231,7 +224,6 @@ isolated function testBatchCreate() returns error? {
     test:assertTrue(response is BatchResponseSimplePublicObject, "Batch creation should return a successful response.");
     
 }
-
 
 @test:Config {}
 isolated function testBatchUpdate() returns error? {
@@ -261,7 +253,6 @@ isolated function testBatchUpdate() returns error? {
     test:assertTrue(response is BatchResponseSimplePublicObject, "Batch update should return a successful response.");
 }
 
-
 @test:Config {}
 isolated function testBatchArchive() returns error? {
     // Define the batch payload for archiving companies
@@ -277,7 +268,6 @@ isolated function testBatchArchive() returns error? {
 
     test:assertTrue(response.statusCode == 204, "Batch archive should return a successful status code (204).");
 }
-
 
 @test:Config {}
 isolated function testMergeCompanies() returns error? {
