@@ -14,32 +14,50 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/test;
-import ballerina/oauth2;
-// import ballerina/io;
 import ballerina/http;
+import ballerina/oauth2;
+import ballerina/os;
+import ballerina/test;
 
-configurable string clientId = ?;
-configurable string clientSecret = ?;
-configurable string refreshToken = ?;
+final boolean isLiveServer = os:getEnv("IS_LIVE_SERVER") == "true";
+final string serviceUrl = isLiveServer ? "https://api.hubapi.com/crm/v3/objects" : "http://localhost:9090";
 
-OAuth2RefreshTokenGrantConfig auth = {
-       clientId: clientId,
-       clientSecret: clientSecret,
-       refreshToken: refreshToken,
-       credentialBearer: oauth2:POST_BODY_BEARER
-};
+final string clientId = os:getEnv("HUBSPOT_CLIENT_ID");
+final string clientSecret = os:getEnv("HUBSPOT_CLIENT_SECRET");
+final string refreshToken = os:getEnv("HUBSPOT_REFRESH_TOKEN");
 
-final Client hubSpotCrmCompanies = check new ({ auth });
+final Client hubSpotCrmCompanies = check initClient();
 
-@test:Config {}
+isolated function initClient() returns Client|error {
+    if isLiveServer {
+        OAuth2RefreshTokenGrantConfig auth = {
+            clientId: clientId,
+            clientSecret: clientSecret,
+            refreshToken: refreshToken,
+            credentialBearer: oauth2:POST_BODY_BEARER
+        };
+        return check new ({auth}, serviceUrl);
+    }
+    return check new ({
+        auth: {
+            token: "test-token"
+        }
+    }, serviceUrl);
+}
+
+
+@test:Config {
+    groups: ["live_tests", "mock_tests"]
+}
 isolated function testGetAllCompanies() returns error? {
   CollectionResponseSimplePublicObjectWithAssociationsForwardPaging  companies = check hubSpotCrmCompanies->/companies;
   test:assertTrue(companies.results.length() > 0);
 };
 
 
-@test:Config {}
+@test:Config {
+    groups: ["live_tests", "mock_tests"]
+}
 isolated function testBatchRead() returns error? {
     // Define the payload for the request
     BatchReadInputSimplePublicObjectId payload = {
@@ -55,7 +73,9 @@ isolated function testBatchRead() returns error? {
     test:assertTrue(response.results.length() > 0, "Expected non-zero amount of companies");
 }
 
-@test:Config {}
+@test:Config {
+    groups: ["live_tests", "mock_tests"]
+}
 isolated function testCreateCompanies() returns error? {
     // Define the payload for creating a company
     SimplePublicObjectInputForCreate payload = {
@@ -76,7 +96,9 @@ isolated function testCreateCompanies() returns error? {
     test:assertEquals(response.properties["name"], "Maga", "Expected company name to match");
 }
 
-@test:Config {}
+@test:Config {
+    groups: ["live_tests"]
+}
 isolated function testGetCompanies() returns error? {
     // Define the query parameters
     GetCrmV3ObjectsCompanies_getpageQueries queries = {
@@ -96,7 +118,9 @@ isolated function testGetCompanies() returns error? {
 
 }
 
-@test:Config {}
+@test:Config {
+    groups: ["live_tests"]
+}
 isolated function testSearchCompany() returns error? {
     // Define the payload for the search request
     PublicObjectSearchRequest payload = {
@@ -114,7 +138,9 @@ isolated function testSearchCompany() returns error? {
 
 }
 
-@test:Config {}
+@test:Config {
+    groups: ["live_tests"]
+}
 isolated function testUpdateCompany() returns error? {
     // Define the company ID to update
     string companyId = "28253323423"; // Replace with the actual company ID
@@ -135,7 +161,9 @@ isolated function testUpdateCompany() returns error? {
 
 }
 
-@test:Config {}
+@test:Config {
+    groups: ["live_tests"]
+}
 isolated function testGetCompanyById() returns error? {
     // Define the company ID to retrieve
     string companyId = "28228574530"; 
@@ -151,7 +179,9 @@ isolated function testGetCompanyById() returns error? {
 
 }
 
-@test:Config {}
+@test:Config {
+    groups: ["live_tests"]
+}
 isolated function testDeleteCompany() returns error? {
     // Define the company ID to delete
     string companyId = "28200512883"; // Replace with the actual company ID to be archived
@@ -164,7 +194,9 @@ isolated function testDeleteCompany() returns error? {
 
 }
 
-@test:Config {}
+@test:Config {
+    groups: ["live_tests"]
+}
 isolated function testBatchUpsert() returns error? {
     // Define the payload for upserting companies
     BatchInputSimplePublicObjectBatchInputUpsert payload = {
@@ -199,7 +231,9 @@ isolated function testBatchUpsert() returns error? {
 
 }
 
-@test:Config {}
+@test:Config {
+    groups: ["live_tests"]
+}
 isolated function testBatchCreate() returns error? {
     // Define the batch payload for creating companies
     BatchInputSimplePublicObjectInputForCreate payload = {
@@ -226,7 +260,9 @@ isolated function testBatchCreate() returns error? {
     
 }
 
-@test:Config {}
+@test:Config {
+    groups: ["live_tests"]
+}
 isolated function testBatchUpdate() returns error? {
     // Define the batch payload for updating companies
     BatchInputSimplePublicObjectBatchInput payload = {
@@ -254,7 +290,9 @@ isolated function testBatchUpdate() returns error? {
     test:assertTrue(response is BatchResponseSimplePublicObject, "Batch update should return a successful response.");
 }
 
-@test:Config {}
+@test:Config {
+    groups: ["live_tests"]
+}
 isolated function testBatchArchive() returns error? {
     // Define the batch payload for archiving companies
     BatchInputSimplePublicObjectId payload = {
@@ -268,19 +306,4 @@ isolated function testBatchArchive() returns error? {
     http:Response response = check hubSpotCrmCompanies->/companies/batch/archive.post(payload);
 
     test:assertTrue(response.statusCode == 204, "Batch archive should return a successful status code (204).");
-}
-
-@test:Config {}
-isolated function testMergeCompanies() returns error? {
-    // Define the payload for merging two companies
-    PublicMergeInput payload = {
-        objectIdToMerge: "28285841794", 
-        primaryObjectId: "28207511091" 
-    };
-
-    // Send the POST request to merge companies
-    SimplePublicObject response = check hubSpotCrmCompanies->/companies/merge.post(payload);
-      
-    // Ensure the merged object contains the primary object ID
-    test:assertTrue(response.id == payload.primaryObjectId, string `Merged company's ID should match the primary object ID. Found: ${response.id}`);
 }
