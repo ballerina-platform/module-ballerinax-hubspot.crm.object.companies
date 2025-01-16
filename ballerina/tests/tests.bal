@@ -97,7 +97,8 @@ isolated function testCreateCompanies() returns error? {
 }
 
 @test:Config {
-    groups: ["live_tests"]
+    groups: ["live_tests"],
+    enable: isLiveServer
 }
 isolated function testGetCompanies() returns error? {
     // Define the query parameters
@@ -119,7 +120,8 @@ isolated function testGetCompanies() returns error? {
 }
 
 @test:Config {
-    groups: ["live_tests"]
+    groups: ["live_tests"],
+    enable: isLiveServer
 }
 isolated function testSearchCompany() returns error? {
     // Define the payload for the search request
@@ -139,7 +141,8 @@ isolated function testSearchCompany() returns error? {
 }
 
 @test:Config {
-    groups: ["live_tests"]
+    groups: ["live_tests"],
+    enable: isLiveServer
 }
 isolated function testUpdateCompany() returns error? {
     // Define the company ID to update
@@ -162,7 +165,8 @@ isolated function testUpdateCompany() returns error? {
 }
 
 @test:Config {
-    groups: ["live_tests"]
+    groups: ["live_tests"],
+    enable: isLiveServer
 }
 isolated function testGetCompanyById() returns error? {
     // Define the company ID to retrieve
@@ -180,7 +184,8 @@ isolated function testGetCompanyById() returns error? {
 }
 
 @test:Config {
-    groups: ["live_tests"]
+    groups: ["live_tests"],
+    enable: isLiveServer
 }
 isolated function testDeleteCompany() returns error? {
     // Define the company ID to delete
@@ -195,7 +200,8 @@ isolated function testDeleteCompany() returns error? {
 }
 
 @test:Config {
-    groups: ["live_tests"]
+    groups: ["live_tests"],
+    enable: isLiveServer
 }
 isolated function testBatchUpsert() returns error? {
     // Define the payload for upserting companies
@@ -232,7 +238,8 @@ isolated function testBatchUpsert() returns error? {
 }
 
 @test:Config {
-    groups: ["live_tests"]
+    groups: ["live_tests"],
+    enable: isLiveServer
 }
 isolated function testBatchCreate() returns error? {
     // Define the batch payload for creating companies
@@ -261,7 +268,8 @@ isolated function testBatchCreate() returns error? {
 }
 
 @test:Config {
-    groups: ["live_tests"]
+    groups: ["live_tests"],
+    enable: isLiveServer
 }
 isolated function testBatchUpdate() returns error? {
     // Define the batch payload for updating companies
@@ -291,7 +299,8 @@ isolated function testBatchUpdate() returns error? {
 }
 
 @test:Config {
-    groups: ["live_tests"]
+    groups: ["live_tests"],
+    enable: isLiveServer
 }
 isolated function testBatchArchive() returns error? {
     // Define the batch payload for archiving companies
