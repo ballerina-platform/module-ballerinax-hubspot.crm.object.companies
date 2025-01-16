@@ -45,15 +45,13 @@ isolated function initClient() returns Client|error {
     }, serviceUrl);
 }
 
-
 @test:Config {
     groups: ["live_tests", "mock_tests"]
 }
 isolated function testGetAllCompanies() returns error? {
-  CollectionResponseSimplePublicObjectWithAssociationsForwardPaging  companies = check hubSpotCrmCompanies->/companies;
-  test:assertTrue(companies.results.length() > 0);
+    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging companies = check hubSpotCrmCompanies->/companies;
+    test:assertTrue(companies.results.length() > 0);
 };
-
 
 @test:Config {
     groups: ["live_tests", "mock_tests"]
@@ -63,12 +61,12 @@ isolated function testBatchRead() returns error? {
     BatchReadInputSimplePublicObjectId payload = {
         propertiesWithHistory: [],
         inputs: [
-            {id: "28253323423"}, 
-            {id: "28200512883"} 
+            {id: "28253323423"},
+            {id: "28200512883"}
         ],
         properties: []
     };
-    
+
     BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check hubSpotCrmCompanies->/companies/batch/read.post(payload);
     test:assertTrue(response.results.length() > 0, "Expected non-zero amount of companies");
 }
@@ -80,14 +78,14 @@ isolated function testCreateCompanies() returns error? {
     // Define the payload for creating a company
     SimplePublicObjectInputForCreate payload = {
         properties: {
-    "name": "Maga",
-    "domain": "maga.com",
-    "city": "Colombo",
-    "industry": "MARKETING_AND_ADVERTISING",
-    "phone": "111-111-111",
-    "state": "Western",
-    "lifecyclestage": "lead"
-  },
+            "name": "Maga",
+            "domain": "maga.com",
+            "city": "Colombo",
+            "industry": "MARKETING_AND_ADVERTISING",
+            "phone": "111-111-111",
+            "state": "Western",
+            "lifecyclestage": "lead"
+        },
         associations: []
     };
 
@@ -127,7 +125,7 @@ isolated function testSearchCompany() returns error? {
     // Define the payload for the search request
     PublicObjectSearchRequest payload = {
         query: "TestCompany", // Search query
-        'limit: 10,         // Limit the results to 10
+        'limit: 10, // Limit the results to 10
         after: (),
         sorts: [],
         properties: ["name", "domain", "hs_object_id"], // Properties to include in the response
@@ -151,8 +149,8 @@ isolated function testUpdateCompany() returns error? {
     // Define the payload for updating the company
     SimplePublicObjectInput payload = {
         properties: {
-            "name": "Updated TestCompany",  
-            "domain": "updateddomain.com"  
+            "name": "Updated TestCompany",
+            "domain": "updateddomain.com"
         }
     };
 
@@ -170,7 +168,7 @@ isolated function testUpdateCompany() returns error? {
 }
 isolated function testGetCompanyById() returns error? {
     // Define the company ID to retrieve
-    string companyId = "28228574530"; 
+    string companyId = "28228574530";
 
     // Define query parameters (optional)
     GetCrmV3ObjectsCompaniesCompanyid_getbyidQueries queries = {};
@@ -233,7 +231,7 @@ isolated function testBatchUpsert() returns error? {
 
     // Ensure at least one company was successfully upserted
     test:assertTrue(response.results.length() > 0,
-    string `At least one company should be successfully upserted. Found: ${response.results.length()}`);
+            string `At least one company should be successfully upserted. Found: ${response.results.length()}`);
 
 }
 
@@ -264,7 +262,7 @@ isolated function testBatchCreate() returns error? {
     BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check hubSpotCrmCompanies->/companies/batch/create.post(payload);
 
     test:assertTrue(response is BatchResponseSimplePublicObject, "Batch creation should return a successful response.");
-    
+
 }
 
 @test:Config {
@@ -276,14 +274,14 @@ isolated function testBatchUpdate() returns error? {
     BatchInputSimplePublicObjectBatchInput payload = {
         inputs: [
             {
-                id: "28166846756", 
+                id: "28166846756",
                 properties: {
                     "name": "UpdatedCompanyOne",
                     "domain": "updatedcompanyone.com"
                 }
             },
             {
-                id: "28174006653", 
+                id: "28174006653",
                 properties: {
                     "name": "UpdatedCompanyTwo",
                     "domain": "updatedcompanytwo.com"
@@ -306,8 +304,8 @@ isolated function testBatchArchive() returns error? {
     // Define the batch payload for archiving companies
     BatchInputSimplePublicObjectId payload = {
         inputs: [
-            { id: "28104552201" }, 
-            { id: "28152220570" } 
+            {id: "28104552201"},
+            {id: "28152220570"}
         ]
     };
 

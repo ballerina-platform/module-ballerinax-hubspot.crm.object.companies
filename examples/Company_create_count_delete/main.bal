@@ -14,9 +14,9 @@
 // specific language governing permissions and limitations
 // under the License.
 
+import ballerina/http;
 import ballerina/io;
 import ballerina/oauth2;
-import ballerina/http;
 import ballerinax/hubspot.crm.obj.companies;
 
 configurable string clientId = ?;
@@ -51,7 +51,7 @@ public function main() returns error? {
         ]
     };
 
-    companies:BatchResponseSimplePublicObject|companies:BatchResponseSimplePublicObjectWithErrors|error createResponse = 
+    companies:BatchResponseSimplePublicObject|companies:BatchResponseSimplePublicObjectWithErrors|error createResponse =
         hubSpotCrmCompanies->/companies/batch/create.post(createPayload);
 
     string companyXId;
@@ -77,7 +77,7 @@ public function main() returns error? {
         properties: ["name", "domain", "hs_object_id"]
     };
 
-    companies:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging|error getAllCompaniesResponse = 
+    companies:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging|error getAllCompaniesResponse =
         hubSpotCrmCompanies->/companies.get(queries = getQueries);
 
     if getAllCompaniesResponse is companies:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging {
