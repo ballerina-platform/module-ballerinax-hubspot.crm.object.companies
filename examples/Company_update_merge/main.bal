@@ -16,7 +16,6 @@
 
 import ballerina/io;
 import ballerina/oauth2;
-// import ballerina/http;
 import ballerinax/hubspot.crm.obj.companies;
 
 configurable string clientId = ?;
