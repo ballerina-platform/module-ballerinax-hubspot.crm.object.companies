@@ -11,7 +11,6 @@
 
 The `ballerinax/module-ballerinax-hubspot.crm.obj.companies` package offers APIs to connect and interact with the [HubSpot companies API](https://api.hubapi.com/crm/v3/objects/companies) endpoints, specifically based on the [HubSpot REST API](https://developers.hubspot.com/docs/reference/api/crm/objects/companies).
 
-Using this API, users can develop applications easily that enables you to manage companies easily.
 
 ## Setup guide
 
