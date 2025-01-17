@@ -46,7 +46,6 @@ Within app developer accounts, you can create a [developer test account](https:/
 1. In your developer account, navigate to the "Apps" section. Click on "Create App"
    ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/main/docs/resources/create_app_1.png)
 
-
 2. Provide the necessary details, including the app name and description.
 
 ### Step 4: Configure the Authentication Flow.
