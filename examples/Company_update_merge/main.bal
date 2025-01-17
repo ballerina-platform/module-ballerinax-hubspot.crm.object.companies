@@ -97,6 +97,5 @@ public function main() returns error? {
         io:println("Merged Company J into Company K. Final Company ID: ", mergeResponse.id);
     } else {
         io:println("Failed to merge Company J into Company K: ", mergeResponse);
-        return;
     }
 }
