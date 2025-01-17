@@ -201,9 +201,8 @@ bal run
 
 The `ballerinax/hubspot.crm.obj.companies` connector provides practical examples illustrating usage in various scenarios.Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/tree/main/examples), covering the following use cases:
 
-1. [Create Count and Delete Companies](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/tree/main/examples/Company_create_count_delete) - see how the Hubspot API can be used to create companies and manage it through the sales pipeline.
-2. [Update Merge Companies](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/tree/main/examples/Company_update_merge) - see how the Hubspot API can be used to count the number of companies in each stages of sales pipeline.
-
+1. [Create Count Delete Companies](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/tree/main/examples/Company_create_count_delete) - see how the Hubspot API can be used to create, count and delete companies.
+2. [Update and Merge Companies](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/tree/main/examples/Company_update_merge) - see how the Hubspot API can be used to merge and update companies.
 
 
 
