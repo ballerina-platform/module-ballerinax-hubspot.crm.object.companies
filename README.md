@@ -156,7 +156,6 @@ final companies:Client hubSpotCrmCompanies = check new ({ auth });
 clientId = "<Client Id>"
 clientSecret = "<Client Secret>"
 refreshToken = "<Refresh Token>"
-credentialBearer = "POST_BODY_BEARER"
 ````
 
 ### Step 3: Invoke the connector operation
