@@ -136,6 +136,7 @@ To use the `HubSpot CRM Companies Connector` connector in your Ballerina applica
 Import the `ballerinax/hubspot.crm.obj.companies` and `ballerina/oauth2` module.
 
 ````java
+import ballerina/oauth2;
 import ballerinax/hubspot.crm.obj.companies;
 ````
 
