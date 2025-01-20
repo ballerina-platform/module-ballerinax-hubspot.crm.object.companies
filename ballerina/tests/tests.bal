@@ -57,7 +57,6 @@ isolated function testGetAllCompanies() returns error? {
     groups: ["live_tests", "mock_tests"]
 }
 isolated function testBatchRead() returns error? {
-    // Define the payload for the request
     BatchReadInputSimplePublicObjectId payload = {
         propertiesWithHistory: [],
         inputs: [
@@ -75,7 +74,6 @@ isolated function testBatchRead() returns error? {
     groups: ["live_tests", "mock_tests"]
 }
 isolated function testCreateCompanies() returns error? {
-    // Define the payload for creating a company
     SimplePublicObjectInputForCreate payload = {
         properties: {
             "name": "Maga",
@@ -90,7 +88,6 @@ isolated function testCreateCompanies() returns error? {
     };
 
     SimplePublicObject response = check hubSpotCrmCompanies->/companies.post(payload);
-
     test:assertEquals(response.properties["name"], "Maga", "Expected company name to match");
 }
 
@@ -99,7 +96,6 @@ isolated function testCreateCompanies() returns error? {
     enable: isLiveServer
 }
 isolated function testGetCompanies() returns error? {
-    // Define the query parameters
     GetCrmV3ObjectsCompanies_getpageQueries queries = {
         associations: [],
         archived: false,
@@ -109,12 +105,8 @@ isolated function testGetCompanies() returns error? {
         properties: ["name", "domain", "hs_object_id"]
     };
 
-    // Send the GET request with query parameters
     CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check hubSpotCrmCompanies->/companies.get(queries = queries);
-
-    // Assert that the response contains at least one company
     test:assertTrue(response.results.length() > 0, "Expected at least one company to be returned");
-
 }
 
 @test:Config {
@@ -122,9 +114,8 @@ isolated function testGetCompanies() returns error? {
     enable: isLiveServer
 }
 isolated function testSearchCompany() returns error? {
-    // Define the payload for the search request
     PublicObjectSearchRequest payload = {
-        query: "TestCompany", // Search query
+        query: "TestCompany",
         'limit: 10, // Limit the results to 10
         after: (),
         sorts: [],
@@ -132,7 +123,6 @@ isolated function testSearchCompany() returns error? {
         filterGroups: []
     };
 
-    // Send the POST request with the payload
     CollectionResponseWithTotalSimplePublicObjectForwardPaging response = check hubSpotCrmCompanies->/companies/search.post(payload);
     test:assertTrue(response.results.length() > 0, "Expected at least one company to match the search criteria");
 
@@ -143,23 +133,16 @@ isolated function testSearchCompany() returns error? {
     enable: isLiveServer
 }
 isolated function testUpdateCompany() returns error? {
-    // Define the company ID to update
     string companyId = "28253323423"; // Replace with the actual company ID
-
-    // Define the payload for updating the company
     SimplePublicObjectInput payload = {
         properties: {
             "name": "Updated TestCompany",
             "domain": "updateddomain.com"
         }
     };
-
-    // Send the PATCH request with the payload
     SimplePublicObject response = check hubSpotCrmCompanies->/companies/[companyId].patch(payload);
-
     test:assertEquals(response.properties["name"], "Updated TestCompany", "The company name was not updated correctly.");
     test:assertEquals(response.properties["domain"], "updateddomain.com", "The company domain was not updated correctly.");
-
 }
 
 @test:Config {
@@ -167,16 +150,9 @@ isolated function testUpdateCompany() returns error? {
     enable: isLiveServer
 }
 isolated function testGetCompanyById() returns error? {
-    // Define the company ID to retrieve
     string companyId = "28228574530";
-
-    // Define query parameters (optional)
     GetCrmV3ObjectsCompaniesCompanyid_getbyidQueries queries = {};
-
-    // Send the GET request
     SimplePublicObjectWithAssociations response = check hubSpotCrmCompanies->/companies/[companyId](queries = queries);
-
-    // Assert the response is not empty
     test:assertTrue(response.id != "", "No company data was retrieved.");
 
 }
@@ -186,15 +162,9 @@ isolated function testGetCompanyById() returns error? {
     enable: isLiveServer
 }
 isolated function testDeleteCompany() returns error? {
-    // Define the company ID to delete
     string companyId = "28200512883"; // Replace with the actual company ID to be archived
-
-    // Send the DELETE request
     http:Response response = check hubSpotCrmCompanies->/companies/[companyId].delete();
-
-    // Assert successful deletion (HTTP status code 204 indicates success)
     test:assertEquals(response.statusCode, 204, "Company was not archived successfully.");
-
 }
 
 @test:Config {
@@ -202,7 +172,6 @@ isolated function testDeleteCompany() returns error? {
     enable: isLiveServer
 }
 isolated function testBatchUpsert() returns error? {
-    // Define the payload for upserting companies
     BatchInputSimplePublicObjectBatchInputUpsert payload = {
         inputs: [
             {
@@ -226,10 +195,7 @@ isolated function testBatchUpsert() returns error? {
         ]
     };
 
-    // Send the POST request to upsert companies
     BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors response = check hubSpotCrmCompanies->/companies/batch/upsert.post(payload);
-
-    // Ensure at least one company was successfully upserted
     test:assertTrue(response.results.length() > 0,
             string `At least one company should be successfully upserted. Found: ${response.results.length()}`);
 
@@ -240,7 +206,6 @@ isolated function testBatchUpsert() returns error? {
     enable: isLiveServer
 }
 isolated function testBatchCreate() returns error? {
-    // Define the batch payload for creating companies
     BatchInputSimplePublicObjectInputForCreate payload = {
         inputs: [
             {
@@ -258,11 +223,8 @@ isolated function testBatchCreate() returns error? {
         ]
     };
 
-    // Send the POST request
     BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check hubSpotCrmCompanies->/companies/batch/create.post(payload);
-
-    test:assertTrue(response is BatchResponseSimplePublicObject, "Batch creation should return a successful response.");
-
+    test:assertTrue(response !is BatchResponseSimplePublicObjectWithErrors, "Batch creation should return a successful response.");
 }
 
 @test:Config {
@@ -270,7 +232,6 @@ isolated function testBatchCreate() returns error? {
     enable: isLiveServer
 }
 isolated function testBatchUpdate() returns error? {
-    // Define the batch payload for updating companies
     BatchInputSimplePublicObjectBatchInput payload = {
         inputs: [
             {
@@ -289,11 +250,8 @@ isolated function testBatchUpdate() returns error? {
             }
         ]
     };
-
-    // Send the POST request
     BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check hubSpotCrmCompanies->/companies/batch/update.post(payload);
-
-    test:assertTrue(response is BatchResponseSimplePublicObject, "Batch update should return a successful response.");
+    test:assertTrue(response !is BatchResponseSimplePublicObjectWithErrors, "Batch update should return a successful response.");
 }
 
 @test:Config {
@@ -301,16 +259,12 @@ isolated function testBatchUpdate() returns error? {
     enable: isLiveServer
 }
 isolated function testBatchArchive() returns error? {
-    // Define the batch payload for archiving companies
     BatchInputSimplePublicObjectId payload = {
         inputs: [
             {id: "28104552201"},
             {id: "28152220570"}
         ]
     };
-
-    // Send the POST request
     http:Response response = check hubSpotCrmCompanies->/companies/batch/archive.post(payload);
-
     test:assertTrue(response.statusCode == 204, "Batch archive should return a successful status code (204).");
 }
