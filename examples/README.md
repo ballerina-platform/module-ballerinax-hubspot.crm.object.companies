@@ -2,13 +2,6 @@
 
 The `ballerinax/hubspot.crm.object.companies` connector provides practical examples illustrating usage in various scenarios.
 
-[//]: # (TODO: Add examples)
-1. 
-2. 
-
-## Prerequisites
-
-[//]: # (TODO: Add prerequisites)
 
 ## Running an example
 

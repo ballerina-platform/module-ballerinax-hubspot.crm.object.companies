@@ -140,23 +140,28 @@ import ballerinax/hubspot.crm.obj.companies;
 
 ### Step 2: Instantiate a new connector
 
-1. Create a `companies:OAuth2RefreshTokenGrantConfig` with the obtained access token and initialize the connector with it.
+1. Create a `companies:ConnectionConfig` with the obtained access token and initialize the connector with it.
 
-````ballerina
-configurable companies:OAuth2RefreshTokenGrantConfig & readonly auth = ?;
+   ```ballerina
+   configurable string clientId = ?;
+   configurable string clientSecret = ?;
+   configurable string refreshToken = ?;
+   
+   companies:OAuth2RefreshTokenGrantConfig auth = {
+        clientId,
+        clientSecret,
+        refreshToken,
+        credentialBearer: oauth2:POST_BODY_BEARER
+    };
+   final companies:Client hubSpotCompanies = check new ({ auth });
+   ```
 
-final companies:Client hubSpotCrmCompanies = check new ({ auth });
-````
-
-2. Create a Config.toml file and, configure the obtained credentials in the above steps as follows:
-
-````toml
-[auth]
-clientId = "<Client Id>"
-clientSecret =  "<Client Secret>"
-refreshToken = "<Refresh Token>"
-credentialBearer =  "POST_BODY_BEARER"
-````
+2. Create a `config.toml` file and, configure the obtained credentials in the above steps as follows:
+   ```toml
+   clientId = "<Client ID>"
+   clientSecret = "<Client Secret>"
+   refreshToken = "<Access Token>"
+   ```
 
 ### Step 3: Invoke the connector operation
 
