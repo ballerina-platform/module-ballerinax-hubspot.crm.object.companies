@@ -2,6 +2,20 @@
 
 The `ballerinax/hubspot.crm.object.companies` connector provides practical examples illustrating usage in various scenarios.
 
+1. [Manage companies](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/tree/main/examples/Company_create_count_delete) - see how the Hubspot API can be used to Create, count and delete companies in Hubspot.
+2. [Merge Companies](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/tree/main/examples/Company_update_merge) - see how the Hubspot API can be used to create, update, and merge companies in HubSpot.
+
+## Prerequisites
+
+1. Generate hubspot credentials to authenticate the connector as described in the [setup guide](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/tree/main/README.md).
+
+2. For each example, create a `Config.toml` file with the related configuration. Here's an example of how your `Config.toml `file should look:
+    ```toml
+    clientId = "<Client ID>"
+    clientSecret = "<Client Secret>"
+    refreshToken = "<Access Token>"
+    ```
+
 
 ## Running an example
 
