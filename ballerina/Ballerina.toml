@@ -5,7 +5,7 @@ name = "hubspot.crm.obj.companies"
 version = "1.0.0"
 license = ["Apache-2.0"]
 authors = ["Ballerina"]
-keywords = ["hubspot", "crm", "companies", "automation"] 
+keywords = ["hubspot", "crm", "companies", "automation"]
 repository = "https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies"
 
 [build-options]
