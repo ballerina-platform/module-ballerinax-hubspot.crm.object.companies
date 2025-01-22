@@ -1,5 +1,6 @@
 ## Overview
-[HubSpot](https://www.hubspot.com) is an AI-powered customer relationship management (CRM) platform. 
+
+[HubSpot](https://www.hubspot.com) is an AI-powered customer relationship management (CRM) platform.
 
 The `ballerinax/module-ballerinax-hubspot.crm.obj.companies` package offers APIs to connect and interact with the [HubSpot companies API](https://api.hubapi.com/crm/v3/objects/companies) endpoints, specifically based on the [HubSpot REST API](https://developers.hubspot.com/docs/reference/api/crm/objects/companies).
 
@@ -29,17 +30,14 @@ Within app developer accounts, you can create a [developer test account](https:/
 
     ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/main/docs/resources/test_acc_2.png)
 
-
 3. In the dialogue box, give a name to your test account and click create.
 
     ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/main/docs/resources/test_acc_3.png)
-
 
 ### Step 3: Create a HubSpot App under your account.
 
 1. In your developer account, navigate to the "Apps" section. Click on "Create App"
    ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/main/docs/resources/create_app_1.png)
-
 
 2. Provide the necessary details, including the app name and description.
 
@@ -47,22 +45,19 @@ Within app developer accounts, you can create a [developer test account](https:/
 
 1. Move to the Auth Tab.
 
-
    ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/main/docs/resources/create_app_2.png)
 
 
 2. In the Scopes section, add the following scopes for your app using the "Add new scope" button.
 
-   `crm.objects.companies.read`
-   `crm.objects.companies.write`
+   - `crm.objects.companies.read`
+   - `crm.objects.companies.write`
 
    ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/main/docs/resources/scope_set.png)
 
-
-4. Add your Redirect URI in the relevant section. You can also use localhost addresses for local development purposes. Click Create App.
+3. Add your Redirect URI in the relevant section. You can also use `localhost` addresses for local development purposes. Click Create App.
 
    ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/main/docs/resources/create_app_final.png)
-
 
 ### Step 5: Get your Client ID and Client Secret
 
@@ -84,14 +79,10 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
    Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>` and `<YOUR_SCOPES>` with your specific value.
 
 2. Paste it in the browser and select your developer test account to intall the app when prompted.
-    
+
    ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/main/docs/resources/install_app.png)
 
 3. A code will be displayed in the browser. Copy the code.
-
-   ```
-   Received code: na1-129d-860c-xxxx-xxxx-xxxxxxxxxxxx
-   ```
 
 4. Run the following curl command. Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI`> and `<YOUR_CLIENT_SECRET>` with your specific value. Use the code you received in the above step 3 as the `<CODE>`.
 
@@ -134,7 +125,7 @@ To use the `HubSpot CRM Companies Connector` connector in your Ballerina applica
 
 Import the `hubspot.crm.obj.companies` module.
 
-````java
+````ballerina
 import ballerinax/hubspot.crm.obj.companies;
 ````
 
@@ -162,7 +153,7 @@ credentialBearer =  "POST_BODY_BEARER"
 
 Now, utilize the available connector operations.
 
-**Create a company**
+#### Create a company
 
 ```ballerina
 companies:SimplePublicObjectInputForCreate newCompany = {
@@ -182,7 +173,7 @@ companies:SimplePublicObject response = check hubSpotCrmCompanies->/companies.po
 
 ```
 
-**List companies**
+#### List companies
 
 ```ballerina
 companies:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging companies = check hubSpotCrmCompanies->/companies;
@@ -195,10 +186,9 @@ companies:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging comp
 bal run
 ````
 
-
 ## Examples
 
 The `Ballerina HubSpot CRM Companies Connector` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-hubspot.crm.object.companies/tree/main/examples/), covering the following use cases:
 
-1. [Create Count Delete Companies](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/tree/main/examples/Company_create_count_delete) - see how the Hubspot API can be used to create, count and delete companies.
-2. [Update and Merge Companies](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/tree/main/examples/Company_update_merge) - see how the Hubspot API can be used to merge and update companies.
+1. [Create Count Delete Companies](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/tree/main/examples/Company_create_count_delete) - see how the HubSpot API can be used to create, count and delete companies.
+2. [Update and Merge Companies](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/tree/main/examples/Company_update_merge) - see how the HubSpot API can be used to merge and update companies.
