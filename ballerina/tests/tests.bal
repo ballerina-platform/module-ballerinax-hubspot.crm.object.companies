@@ -14,7 +14,6 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/http;
 import ballerina/oauth2;
 import ballerina/os;
 import ballerina/test;
@@ -96,7 +95,7 @@ isolated function testCreateCompanies() returns error? {
     enable: isLiveServer
 }
 isolated function testGetCompanies() returns error? {
-    GetCrmV3ObjectsCompanies_getpageQueries queries = {
+    GetCrmV3ObjectsCompaniesGetPageQueries queries = {
         associations: [],
         archived: false,
         propertiesWithHistory: [],
@@ -151,7 +150,7 @@ isolated function testUpdateCompany() returns error? {
 }
 isolated function testGetCompanyById() returns error? {
     string companyId = "28228574530";
-    GetCrmV3ObjectsCompaniesCompanyid_getbyidQueries queries = {};
+    GetCrmV3ObjectsCompaniesCompanyIdGetByIdQueries queries = {};
     SimplePublicObjectWithAssociations response = check hubSpotCrmCompanies->/companies/[companyId](queries = queries);
     test:assertTrue(response.id != "", "No company data was retrieved.");
 
@@ -163,8 +162,8 @@ isolated function testGetCompanyById() returns error? {
 }
 isolated function testDeleteCompany() returns error? {
     string companyId = "28200512883"; // Replace with the actual company ID to be archived
-    http:Response response = check hubSpotCrmCompanies->/companies/[companyId].delete();
-    test:assertEquals(response.statusCode, 204, "Company was not archived successfully.");
+    _ = check hubSpotCrmCompanies->/companies/[companyId].delete();
+    test:assertTrue(true, "Company deleted successfully.");
 }
 
 @test:Config {
@@ -265,6 +264,6 @@ isolated function testBatchArchive() returns error? {
             {id: "28152220570"}
         ]
     };
-    http:Response response = check hubSpotCrmCompanies->/companies/batch/archive.post(payload);
-    test:assertTrue(response.statusCode == 204, "Batch archive should return a successful status code (204).");
+    _ = check hubSpotCrmCompanies->/companies/batch/archive.post(payload);
+    test:assertTrue(true, "Batch archive should return a successful response.");
 }

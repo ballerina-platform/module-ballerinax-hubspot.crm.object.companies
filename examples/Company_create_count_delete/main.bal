@@ -14,7 +14,6 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/http;
 import ballerina/io;
 import ballerina/oauth2;
 import ballerinax/hubspot.crm.obj.companies;
@@ -68,7 +67,7 @@ public function main() returns error? {
     }
 
     // Step 2: Get All Companies and Print Count
-    companies:GetCrmV3ObjectsCompanies_getpageQueries getQueries = {
+    companies:GetCrmV3ObjectsCompaniesGetPageQueries getQueries = {
         associations: [],
         archived: false,
         propertiesWithHistory: [],
@@ -89,9 +88,9 @@ public function main() returns error? {
     }
 
     // Step 3: Delete Company X
-    http:Response|error deleteResponse = hubSpotCrmCompanies->/companies/[companyXId].delete();
+    error? deleteResponse = hubSpotCrmCompanies->/companies/[companyXId].delete();
 
-    if deleteResponse is http:Response {
+    if deleteResponse is () {
         io:println("Deleted Company X with ID: ", companyXId);
     } else {
         io:println("Error occurred while deleting Company X: ", deleteResponse);
