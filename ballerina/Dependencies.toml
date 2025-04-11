@@ -61,7 +61,7 @@ dependencies = [
 [[package]]
 org = "ballerina"
 name = "http"
-version = "2.12.4"
+version = "2.12.8"
 dependencies = [
 	{org = "ballerina", name = "auth"},
 	{org = "ballerina", name = "cache"},
@@ -320,7 +320,7 @@ modules = [
 [[package]]
 org = "ballerinax"
 name = "hubspot.crm.obj.companies"
-version = "1.0.0"
+version = "2.0.0"
 dependencies = [
 	{org = "ballerina", name = "http"},
 	{org = "ballerina", name = "log"},
