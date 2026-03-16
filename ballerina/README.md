@@ -2,9 +2,14 @@
 
 [HubSpot](https://www.hubspot.com) is an AI-powered customer relationship management (CRM) platform.
 
-The `ballerinax/module-ballerinax-hubspot.crm.obj.companies` package offers APIs to connect and interact with the [HubSpot companies API](https://api.hubapi.com/crm/v3/objects/companies) endpoints, specifically based on the [HubSpot REST API](https://developers.hubspot.com/docs/reference/api/crm/objects/companies).
+The HubSpot CRM Companies connector provides APIs to connect and interact with the [HubSpot Companies API](https://api.hubapi.com/crm/v3/objects/companies) endpoints, specifically based on the [HubSpot REST API](https://developers.hubspot.com/docs/reference/api/crm/objects/companies).
 
-Using this API, users can develop applications easily that enables you to manage companies easily.
+### Key Features
+
+- Create, read, update, and delete company records in HubSpot CRM
+- List and search companies with filtering support
+- Merge duplicate company records
+- Manage company associations and lifecycle stages
 
 ## Setup guide
 
